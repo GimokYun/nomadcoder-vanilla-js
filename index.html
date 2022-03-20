@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Comatible" content="IE-edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="css/style.css">
+        <link rel="shortcut icon" href="https://www.maxpixel.net/static/photo/1x/Waves-Ocean-Waves-Icon-Tidal-Wave-Sea-Ocean-6336576.png" type="image/x-icon" sizes="16x16">
+        <title>Wave</title>
+    </head>
+    <body>
+        <div class="first-page hidden">
+            <span class="first-page__animation" id="welcome-message"></span>
+            <h1 class="first-page__animation">What is your name?</h1>
+            <form class="first-page__animation" id = "login-form">
+                <input class="first-page__input" required maxlength="15" type="text" />
+            </form>
+        </div>
+        
+        <header class="header hidden">
+            <div>
+                <div id="weather" class="header__weather">
+                    <span></span>
+                    <span></span>
+                </div>
+                <div class="weather__space"></div>
+            </div>
+            <div id="audio" class="header__audio">
+                <div>
+                    <span class="audio__title"><i class="fa-solid fa-umbrella-beach"></i>Wave Sound</span>
+                </div>
+                <div>
+                    <i id="play-button" class="fa-solid fa-play"></i>
+                    <form id="audio-range"><input type="range" value="0" min="0" /></form>
+                    <i id="volume" class="fa-solid fa-volume-high"></i>
+                </div>
+                <div class="audio__length">
+                    <span id="current">00:00</span>
+                    <span id="duration">00:00</span>
+                </div>
+            </div>
+            <div id="d-day" class="header__d-day">
+                <span>D-Day</span>
+                <span>Event</span>
+            </div>
+        </header>
+
+        <main class="main-page hidden">
+            <span id="date" class="main-page__date">1900.01.01.Mon</span>
+            <span id="clock" class="main-page__clock">00:00:00</span>
+            <span id="greeting" class="main-page__greeting"></span>
+            <span class="main-page__question">What's your plan today?</span>
+            <form id = "todo-form" class="main-page__form">
+                <input type="text" required />
+            </form>
+            <ul id="todo-list" class="main-page__list"></ul>
+        </main>
+
+        <div class="bottom hidden">
+            <div></div>
+            <div id="quote" class="bottom__quote">
+                <span></span>
+                <span></span>
+            </div>
+            <div></div>
+        </div>
+
+        <div class="weather__popup hidden">
+            <div class="weather__popup-message">
+                <span></span>
+            </div>
+            <div class="weather__popup-today">
+                <div>
+                    <span class="weather__popup-location" id="popupLocation"></span>
+                    <span class="weather__popup-description" id="popupDescription"></span>
+                </div>
+                <div>
+                    <span class="weather__popup-main" id="popupToday"></span>
+                </div>
+            </div>
+            <div class="popup__days-forecast">
+                <div class="popup__day-forecast">
+                    <div>
+                        <div class="forecast__icon">
+                        </div>
+                        <div class="forecast__degree">
+                            <span class="forecast__max-degree"></span>
+                            <span class="forecast__min-degree"></span>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="forecast__day"></span>
+                    </div>
+                </div>
+                <div class="popup__day-forecast">
+                    <div>
+                        <div class="forecast__icon">
+                        </div>
+                        <div class="forecast__degree">
+                            <span class="forecast__max-degree"></span>
+                            <span class="forecast__min-degree"></span>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="forecast__day"></span>
+                    </div>
+                </div>
+                <div class="popup__day-forecast">
+                    <div>
+                        <div class="forecast__icon">
+                        </div>
+                        <div class="forecast__degree">
+                            <span class="forecast__max-degree"></span>
+                            <span class="forecast__min-degree"></span>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="forecast__day"></span>
+                    </div>
+                </div>
+                <div class="popup__day-forecast">
+                    <div>
+                        <div class="forecast__icon">
+                        </div>
+                        <div class="forecast__degree">
+                            <span class="forecast__max-degree"></span>
+                            <span class="forecast__min-degree"></span>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="forecast__day"></span>
+                    </div>
+                </div>
+                <div class="popup__day-forecast">
+                    <div>
+                        <div class="forecast__icon">
+                        </div>
+                        <div class="forecast__degree">
+                            <span class="forecast__max-degree"></span>
+                            <span class="forecast__min-degree"></span>
+                        </div>
+                    </div>
+                    <div>
+                        <span class="forecast__day"></span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="d-day__popup hidden">
+            <ul id="d-day-list" class="d-day__list"></ul>
+            <form id="d-day-form" class="d-day__add">
+                <input type="date" required />
+                <input type="text" placeholder="type an event" required />
+            </form>
+        </div>
+
+        <!-- javascript files -->
+        <script src="js/greetings.js"></script>
+        <script src="js/writing.js"></script>
+        <script src="js/clock.js"></script>
+        <script src="js/todo.js"></script>
+        <script src="js/quotes.js"></script>
+        <script src="js/background.js"></script>
+        <script src="js/weather.js"></script>
+        <script src="js/d-day.js"></script>
+        <script src="js/audio.js"></script>
+
+        <!-- font awesome -->
+        <script src="https://kit.fontawesome.com/d09ae18aef.js" crossorigin="anonymous"></script>
+    </body>
+</html>
