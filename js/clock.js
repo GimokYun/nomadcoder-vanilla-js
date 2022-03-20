@@ -11,7 +11,7 @@ function getClock() {
     clock.innerText = `${hours}:${minutes}:${seconds}`;
 
     const years = String(date.getFullYear());
-    const months = String(date.getMonth()+1).padStart(2, "0");
+    const months = String(date.getMonth() + 1).padStart(2, "0");
     const dates = String(date.getDate()).padStart(2, "0");
     const days = daysList[String(date.getDay())];
     dateElement.innerText = `${years}.${months}.${dates}.${days}`;
