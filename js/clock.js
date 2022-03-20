@@ -10,7 +10,16 @@ function getClock() {
     const minutes = String(date.getMinutes()).padStart(2, "0");
     const colon = `<span id="colon">:</span>`;
     clock.innerHTML = `${hours}${colon}${minutes}`;
-    
+    colonAnimation();
+
+    const years = String(date.getFullYear());
+    const months = String(date.getMonth() + 1).padStart(2, "0");
+    const dates = String(date.getDate()).padStart(2, "0");
+    const days = daysList[String(date.getDay())];
+    dateElement.innerText = `${years}.${months}.${dates}.${days}`;
+}
+
+function colonAnimation() {
     const colonElement = document.querySelector("#colon");
     if (colonCheck) {
         colonElement.classList.add("hidden");
@@ -18,12 +27,6 @@ function getClock() {
         colonElement.classList.remove("hidden");
     }
     colonCheck = !colonCheck;
-
-    const years = String(date.getFullYear());
-    const months = String(date.getMonth() + 1).padStart(2, "0");
-    const dates = String(date.getDate()).padStart(2, "0");
-    const days = daysList[String(date.getDay())];
-    dateElement.innerText = `${years}.${months}.${dates}.${days}`;
 }
 
 getClock();
