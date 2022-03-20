@@ -11,16 +11,21 @@ const DDAYS_KEY = "ddays";
 const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
 function printFirstDDay() {
-    const today = new Date();
-    let dateFirst = dDays[0].date;
-    dateFirst = dateFirst.split("/");
-    const date = new Date(`${month[parseInt(dateFirst[1])]} ${dateFirst[2]}, ${dateFirst[0]}`);
-    let dDay = Math.floor((date - today) / (24 * 60 * 60 * 1000));
-    if (dDay === 0) {
-        dDay = "Day";
+    if (dDays.length !== 0) {
+        const today = new Date();
+        let dateFirst = dDays[0].date;
+        dateFirst = dateFirst.split("/");
+        const date = new Date(`${month[parseInt(dateFirst[1])]} ${dateFirst[2]}, ${dateFirst[0]}`);
+        let dDay = Math.floor((date - today) / (24 * 60 * 60 * 1000));
+        if (dDay === 0) {
+            dDay = "Day";
+        }
+        firstDDayDate.innerText = `D-${dDay}`;
+        firstDDayEvent.innerText = dDays[0].event;
+    } else {
+        firstDDayDate.innerText = "D-Day";
+        firstDDayEvent.innerText = "Event";
     }
-    firstDDayDate.innerText = `D-${dDay}`;
-    firstDDayEvent.innerText = dDays[0].event;
 }
 
 function saveDDays() {
@@ -91,10 +96,7 @@ function handleDDaySubmit(event) {
                 break;
             }
         }
-        if (dDays.find(element => element===newDDayObj) === undefined){
-            dDays.push(newDDayObj);
-        }
-
+        dDays.push(newDDayObj);
         paintDDay(newDDayObj);
         saveDDays();
     } else {
@@ -130,10 +132,8 @@ if (savedDDays != null) {
     parsedDDays.forEach(paintDDay);
 }
 
-if (dDays.length !== 0) {
-    printFirstDDay();
-    setInterval(printFirstDDay, 100);
-}
+printFirstDDay();
+setInterval(printFirstDDay, 100);
 
 firstDDayDate.addEventListener("click", clickDDayHandle);
 firstDDayEvent.addEventListener("click", clickDDayHandle);
