@@ -38,7 +38,6 @@ function paintGreetings(username) {
     mainList.classList.add(MAINPAGE_ANIMATION_CLASSNAME);
     bottomQuote.classList.add(QUOTE_ANIMATION_CLASSNAME);
     headerPart.classList.add(HEADER_ANIMATION_CLASSNAME);
-
 }
 
 const savedUsername = localStorage.getItem(USERNAME_KEY);

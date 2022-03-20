@@ -25,12 +25,12 @@
 
 .main-page__clock {
   font-weight: 600;
-  font-size: 150px;
+  font-size: 180px;
 }
 
 .main-page__date {
   font-weight: 500;
-  font-size: 50px;
+  font-size: 40px;
 }
 
 .main-page__appear {
@@ -41,7 +41,7 @@
 .main-page__greeting {
   font-size: 70px;
   font-weight: 500;
-  margin-top: 2%;
+  margin-top: 1%;
   margin-bottom: 1%;
 }
 
