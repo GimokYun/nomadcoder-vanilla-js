@@ -62,7 +62,6 @@ function volumeClickHandle(event) {
         event.target.classList.add(VOLUME_CLASS);
         audio.muted = false;
     }
-    console.log(audio.muted)
 }
 
 function audioRangeHandle(event) {
