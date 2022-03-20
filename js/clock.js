@@ -10,6 +10,7 @@ function getClock() {
     const minutes = String(date.getMinutes()).padStart(2, "0");
     const colon = `<span id="colon">:</span>`;
     clock.innerHTML = `${hours}${colon}${minutes}`;
+    
     const colonElement = document.querySelector("#colon");
     if (colonCheck) {
         colonElement.classList.add("hidden");
