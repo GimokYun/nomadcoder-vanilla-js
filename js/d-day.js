@@ -12,15 +12,17 @@ const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "O
 
 function printFirstDDay() {
     if (dDays.length !== 0) {
-        const today = new Date();
         let dateFirst = dDays[0].date;
-        dateFirst = dateFirst.split("/");
-        const date = new Date(`${month[parseInt(dateFirst[1])]} ${dateFirst[2]}, ${dateFirst[0]}`);
-        let dDay = Math.floor((date - today) / (24 * 60 * 60 * 1000));
+        let dDay = calculateDDay(dateFirst);
         if (dDay === 0) {
             dDay = "Day";
+        } 
+        if (dDay < 0) {
+            dDay = -dDay;
+            firstDDayDate.innerText = `D+${dDay}`;
+        } else {
+            firstDDayDate.innerText = `D-${dDay}`;
         }
-        firstDDayDate.innerText = `D-${dDay}`;
         firstDDayEvent.innerText = dDays[0].event;
     } else {
         firstDDayDate.innerText = "D-Day";
@@ -46,25 +48,34 @@ function paintDDay(newDDay) {
     const deleteBtn = document.createElement("button");
     deleteBtn.addEventListener("click", deleteDDay);
 
-    const today = new Date();
     let dateChosen = newDDay.date;
-    dateChosen = dateChosen.split("/");
-    const date = new Date(`${month[parseInt(dateChosen[1])]} ${dateChosen[2]}, ${dateChosen[0]}`);
-    let dDay = Math.floor((date - today) / (24 * 60 * 60 * 1000));
-    if (dDay === 0) {
-        dDay = "Day";
-    }
-
+    let dDay = calculateDDay(dateChosen);
     newDDayLi.id = newDDay.id;
     newDDayLi.classList.add("d-day__li");
     newDDayEvent.innerText = newDDay.event;
-    newDDayDate.innerText = `D-${dDay}`;
+    if (dDay === 0) {
+        dDay = "Day";
+    } 
+    if (dDay < 0) {
+        dDay = -dDay;
+        newDDayDate.innerText = `D+${dDay}`;
+    } else {
+        newDDayDate.innerText = `D-${dDay}`;
+    }
     deleteBtn.innerText = "X";
 
     newDDayLi.appendChild(deleteBtn);
     newDDayLi.appendChild(newDDayEvent);
     newDDayLi.appendChild(newDDayDate);
     dDayList.appendChild(newDDayLi);
+}
+
+function calculateDDay(dateSelected) {
+    const today = new Date();
+    dateSelected = dateSelected.split("/");
+    const date = new Date(`${month[parseInt(dateSelected[1])]} ${dateSelected[2]}, ${dateSelected[0]}`);
+    let dDay = Math.ceil((date - today) / (24 * 60 * 60 * 1000));
+    return dDay;
 }
 
 function handleDDaySubmit(event) {
@@ -75,46 +86,30 @@ function handleDDaySubmit(event) {
     dateChosen = dateChosen.split("/");
     const date = new Date(`${month[parseInt(dateChosen[1])]} ${dateChosen[2]}, ${dateChosen[0]}`);
 
-    if(date >= today){
-        const newEvent = eventInput.value;
-        const newDDayObj ={
-            "id" : Date.now(),
-            "date" : newDate,
-            "event" : newEvent
-        };
-        dateInput.value = "";
-        eventInput.value = "";
+    const newEvent = eventInput.value;
+    const newDDayObj ={
+        "id" : Date.now(),
+        "date" : newDate,
+        "event" : newEvent
+    };
+    dateInput.value = "";
+    eventInput.value = "";
 
-        const gap = date - today;
-        for (let i = 0 ; i < dDays.length ; i++){
-            let dateInList = dDays[i].date;
-            dateInList = dateInList.split("/");
-            const dateToCompare = new Date(`${month[parseInt(dateInList[1])]} ${dateInList[2]}, ${dateInList[0]}`);
-            const gapToCompare = dateToCompare - today;
-            if (gap < gapToCompare) {
-                dDays.splice(i, 0, newDDayObj);
-                break;
-            }
+    const gap = date - today;
+    for (let i = 0 ; i < dDays.length ; i++){
+        let dateInList = dDays[i].date;
+        dateInList = dateInList.split("/");
+        const dateToCompare = new Date(`${month[parseInt(dateInList[1])]} ${dateInList[2]}, ${dateInList[0]}`);
+        const gapToCompare = dateToCompare - today;
+        if (gap < gapToCompare) {
+            dDays.splice(i, 0, newDDayObj);
+            break;
         }
-        dDays.push(newDDayObj);
-        paintDDay(newDDayObj);
-        saveDDays();
-    } else {
-        const errorMessage = document.createElement("span");
-        errorMessage.innerText = "Please choose a later date than today.";
-        errorMessage.classList.add("remove-span");
-        errorMessage.classList.add("main-page__message");
-        dDayPopUp.appendChild(errorMessage);
-        dateInput.value = "";
-        eventInput.value = "";
     }
-}
 
-function removeMessage() {
-    const spanToRemove = document.querySelector(".remove-span");
-    if (spanToRemove) {
-        spanToRemove.remove();
-    }
+    dDays.push(newDDayObj);
+    paintDDay(newDDayObj);
+    saveDDays();
 }
 
 function clickDDayHandle() {
@@ -122,7 +117,6 @@ function clickDDayHandle() {
 }
 
 dDayForm.addEventListener("submit", handleDDaySubmit);
-setInterval(removeMessage, 3000);
 
 const savedDDays = localStorage.getItem(DDAYS_KEY);
 
