@@ -5,7 +5,7 @@ const weatherPopup = document.querySelector(".weather__popup");
 
 const weatherIcons = {
     "sun" : `<i class="fa-solid fa-sun"></i>`,
-    "moon" : `<i class="fa-solid fa-moond"></i>`,
+    "moon" : `<i class="fa-solid fa-moon"></i>`,
     "clouds" : `<i class="fa-solid fa-cloud"></i>`,
     "snow" : `<i class="fa-solid fa-snowflake"></i>`,
     "rain" : `<i class="fa-solid fa-cloud-showers-heavy"></i>`,
@@ -64,9 +64,12 @@ function getWeatherToday(lat, lon) {
                 weatherMessage = "I hope nothing goes wrong.";
                 break;
             case "Clear" :
+                console.log(hours)
+                console.log(hours>=6 && hours <=18)
                 if (hours >= 6 && hours <= 18) {
                     weatherKey = "sun";
-                } else {
+                }
+                else {
                     weatherKey = "moon";
                 }
                 weatherMessage = "Take a walk and ventilate.";
@@ -124,7 +127,7 @@ function forecastWeather(lat, lon) {
                     weatherKey = "tornado";
                     break;
                 case "Clear" :
-                    wetherkey = "sun";
+                    weatherKey = "sun";
                     break;
                 case "Clouds" :
                     weatherKey = "clouds";
